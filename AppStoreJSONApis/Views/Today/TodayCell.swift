@@ -16,7 +16,6 @@ class TodayCell: BaseTodayCell {
             titleLabel.text = todayItem.title
             imageView.image = todayItem.image
             descriptionLabel.text = todayItem.description
-            
             backgroundColor = todayItem.backgroundColor
             backgroundView?.backgroundColor = todayItem.backgroundColor
         }
@@ -24,11 +23,8 @@ class TodayCell: BaseTodayCell {
     
     let categoryLabel = UILabel(text: "LIFE HACK", font: .boldSystemFont(ofSize: 20))
     let titleLabel = UILabel(text: "Utilizing your Time", font: .boldSystemFont(ofSize: 28))
-    
     let imageView = UIImageView(image: #imageLiteral(resourceName: "garden"))
-    
     let descriptionLabel = UILabel(text: "All the tools and apps you need to intelligently organize your life the right way.", font: .systemFont(ofSize: 16), numberOfLines: 3)
-    
     var topConstraint: NSLayoutConstraint!
     
     override init(frame: CGRect) {

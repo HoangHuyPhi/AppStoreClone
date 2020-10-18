@@ -10,13 +10,26 @@ import Foundation
 
 class Service {
     
-    static let shared = Service() // singleton
+    static let shared = Service()
+    
+    func fetchGenericJSONData<T: Decodable>(urlString: String, completion: @escaping (T?, Error?) -> ()) {
+         guard let url = URL(string: urlString) else { return }
+         URLSession.shared.dataTask(with: url) { (data, resp, err) in
+             if let err = err {
+                 completion(nil, err)
+                 return
+             }
+             do {
+                 let objects = try JSONDecoder().decode(T.self, from: data!)
+                 completion(objects, nil)
+             } catch {
+                 completion(nil, error)
+             }
+         }.resume()
+     }
     
     func fetchApps(searchTerm: String, completion: @escaping (SearchResult?, Error?) -> ()) {
-        print("Fetching itunes apps from Service layer")
-        
         let urlString = "https://itunes.apple.com/search?term=\(searchTerm)&entity=software"
-        
         fetchGenericJSONData(urlString: urlString, completion: completion)
     }
     
@@ -29,7 +42,6 @@ class Service {
         fetchAppGroup(urlString: "https://rss.itunes.apple.com/api/v1/us/ios-apps/new-games-we-love/all/50/explicit.json", completion: completion)
     }
     
-    //helper
     func fetchAppGroup(urlString: String, completion: @escaping (AppGroup?, Error?) -> Void) {
         fetchGenericJSONData(urlString: urlString, completion: completion)
     }
@@ -39,30 +51,8 @@ class Service {
         fetchGenericJSONData(urlString: urlString, completion: completion)
     }
     
-    // declare my generic json function here
-    func fetchGenericJSONData<T: Decodable>(urlString: String, completion: @escaping (T?, Error?) -> ()) {
-        
-        guard let url = URL(string: urlString) else { return }
-        URLSession.shared.dataTask(with: url) { (data, resp, err) in
-            if let err = err {
-                completion(nil, err)
-                return
-            }
-            do {
-                let objects = try JSONDecoder().decode(T.self, from: data!)
-                // success
-                completion(objects, nil)
-            } catch {
-                completion(nil, error)
-            }
-            }.resume()
-    }
-    
 }
 
-// Stack
-
-// Generic is to declare the Type later on
 
 class Stack<T: Decodable> {
     var items = [T]()
@@ -73,7 +63,7 @@ class Stack<T: Decodable> {
 import UIKit
 
 func dummyFunc() {
-//    let stackOfImages = Stack<UIImage>()
+    //    let stackOfImages = Stack<UIImage>()
     
     let stackOfStrings = Stack<String>()
     stackOfStrings.push(item: "HAS TO BE STRING")

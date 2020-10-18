@@ -22,7 +22,6 @@ class TodayController: BaseListController, UICollectionViewDelegateFlowLayout, U
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         tabBarController?.tabBar.superview?.setNeedsLayout()
     }
     
@@ -30,27 +29,31 @@ class TodayController: BaseListController, UICollectionViewDelegateFlowLayout, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fetchData()
+        configureUI()
+    }
+    
+    private func configureUI() {
+        configureBlureView()
+        view.addSubview(activityIndicatorView)
+        activityIndicatorView.centerInSuperview()
+        navigationController?.isNavigationBarHidden = true
+        configureCollectionView()
+    }
+    
+    private func configureBlureView() {
         view.addSubview(blurVisualEffectView)
         blurVisualEffectView.fillSuperview()
         blurVisualEffectView.alpha = 0
-        
-        view.addSubview(activityIndicatorView)
-        activityIndicatorView.centerInSuperview()
-        
-        fetchData()
-        
-        navigationController?.isNavigationBarHidden = true
-        
+    }
+    
+    private func configureCollectionView() {
         collectionView.backgroundColor = #colorLiteral(red: 0.948936522, green: 0.9490727782, blue: 0.9489068389, alpha: 1)
-        
         collectionView.register(TodayCell.self, forCellWithReuseIdentifier: TodayItem.CellType.single.rawValue)
         collectionView.register(TodayMultipleAppCell.self, forCellWithReuseIdentifier: TodayItem.CellType.multiple.rawValue)
     }
     
     fileprivate func fetchData() {
-        // dispatchGroup
-        
         let dispatchGroup = DispatchGroup()
         
         var topGrossingGroup: AppGroup?
@@ -58,7 +61,6 @@ class TodayController: BaseListController, UICollectionViewDelegateFlowLayout, U
         
         dispatchGroup.enter()
         Service.shared.fetchTopGrossing { (appGroup, err) in
-            // make sure to check your errors
             topGrossingGroup = appGroup
             dispatchGroup.leave()
         }
@@ -68,27 +70,17 @@ class TodayController: BaseListController, UICollectionViewDelegateFlowLayout, U
             gamesGroup = appGroup
             dispatchGroup.leave()
         }
-        
-        // completion block
         dispatchGroup.notify(queue: .main) {
-            // I'll have access to top grossing and games somehow
-            
-            print("Finished fetching")
             self.activityIndicatorView.stopAnimating()
-            
             self.items = [
-                
                 TodayItem.init(category: "LIFE HACK", title: "Utilizing your Time", image: #imageLiteral(resourceName: "garden"), description: "All the tools and apps you need to intelligently organize your life the right way.", backgroundColor: .white, cellType: .single, apps: []),
                 TodayItem.init(category: "Daily List", title: topGrossingGroup?.feed.title ?? "", image: #imageLiteral(resourceName: "garden"), description: "", backgroundColor: .white, cellType: .multiple, apps: topGrossingGroup?.feed.results ?? []),
-                
                 TodayItem.init(category: "Daily List", title: gamesGroup?.feed.title ?? "", image: #imageLiteral(resourceName: "garden"), description: "", backgroundColor: .white, cellType: .multiple, apps: gamesGroup?.feed.results ?? []),
                 TodayItem.init(category: "HOLIDAYS", title: "Travel on a Budget", image: #imageLiteral(resourceName: "holiday"), description: "Find out all you need to know on how to travel without packing everything!", backgroundColor: #colorLiteral(red: 0.9838578105, green: 0.9588007331, blue: 0.7274674177, alpha: 1), cellType: .single, apps: []),
 
             ]
-            
             self.collectionView.reloadData()
         }
-        
     }
     
     var appFullscreenController: AppFullscreenController!

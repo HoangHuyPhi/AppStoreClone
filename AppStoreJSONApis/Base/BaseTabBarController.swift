@@ -10,11 +10,9 @@ import UIKit
 
 class BaseTabBarController: UITabBarController {
     
-    // 3 - maybe introduce our AppsSearchController
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("yes")
         viewControllers = [
             createNavController(viewController: TodayController(), title: "Today", imageName: "today_icon"),
             createNavController(viewController: AppsPageController(), title: "Apps", imageName: "apps"),
