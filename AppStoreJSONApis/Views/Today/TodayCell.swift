@@ -29,29 +29,32 @@ class TodayCell: BaseTodayCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        configureUI()
+    }
+    
+    private func configureUI() {
         backgroundColor = .white
-//        clipsToBounds = true
         layer.cornerRadius = 16
-        
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        
+        configureImageView()
+        configureStackView()
+    }
+    
+    private func configureStackView() {
         let imageContainerView = UIView()
         imageContainerView.addSubview(imageView)
         imageView.centerInSuperview(size: .init(width: 240, height: 240))
-        
         let stackView = VerticalStackView(arrangedSubviews: [
             categoryLabel, titleLabel, imageContainerView, descriptionLabel
             ], spacing: 8)
         addSubview(stackView)
-        
         stackView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 24, bottom: 24, right: 24))
         self.topConstraint = stackView.topAnchor.constraint(equalTo: topAnchor, constant: 24)
         self.topConstraint.isActive = true
-        
-//        stackView.fillSuperview(padding: .init(top: 24, left: 24, bottom: 24, right: 24))
-        
+    }
+    
+    private func configureImageView() {
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
     }
     
     required init?(coder aDecoder: NSCoder) {
