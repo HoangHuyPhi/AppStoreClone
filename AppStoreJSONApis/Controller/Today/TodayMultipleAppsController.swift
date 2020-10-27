@@ -10,9 +10,16 @@ import UIKit
 
 class TodayMultipleAppsController: BaseListController, UICollectionViewDelegateFlowLayout {
     
-    let cellId = "cellId"
+    enum Mode {
+        case small, fullscreen
+    }
     
+    let cellId = "cellId"
+    override var prefersStatusBarHidden: Bool { return true }
     var apps = [FeedResult]()
+    fileprivate let mode: Mode
+    let height: CGFloat = 68
+
     
     let closeButton: UIButton = {
         let button = UIButton(type: .system)
@@ -34,19 +41,15 @@ class TodayMultipleAppsController: BaseListController, UICollectionViewDelegateF
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if mode == .fullscreen {
             setupCloseButton()
             navigationController?.isNavigationBarHidden = true
         } else {
             collectionView.isScrollEnabled = false
         }
-        
         collectionView.backgroundColor = .white
         collectionView.register(MultipleAppCell.self, forCellWithReuseIdentifier: cellId)
     }
-    
-    override var prefersStatusBarHidden: Bool { return true }
     
     func setupCloseButton() {
         view.addSubview(closeButton)
@@ -55,7 +58,7 @@ class TodayMultipleAppsController: BaseListController, UICollectionViewDelegateF
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if mode == .fullscreen {
-            return .init(top: 12, left: 24, bottom: 12, right: 24)
+            return .init(top: 50, left: 24, bottom: 12, right: 24)
         }
         return .zero
     }
@@ -64,7 +67,6 @@ class TodayMultipleAppsController: BaseListController, UICollectionViewDelegateF
         if mode == .fullscreen {
             return apps.count
         }
-        
         return min(4, apps.count)
     }
     
@@ -75,8 +77,6 @@ class TodayMultipleAppsController: BaseListController, UICollectionViewDelegateF
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let height: CGFloat = 68
         if mode == .fullscreen {
             return .init(width: view.frame.width - 48, height: height)
         }
@@ -90,11 +90,6 @@ class TodayMultipleAppsController: BaseListController, UICollectionViewDelegateF
         return spacing
     }
     
-    fileprivate let mode: Mode
-    
-    enum Mode {
-        case small, fullscreen
-    }
     
     init(mode: Mode) {
         self.mode = mode

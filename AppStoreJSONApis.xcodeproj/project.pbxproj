@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3AFE03702547FD4800514980 /* TrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE036F2547FD4800514980 /* TrackCell.swift */; };
+		3AFE03742547FD7C00514980 /* FooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE03732547FD7C00514980 /* FooterCell.swift */; };
+		3AFE03782547FDAE00514980 /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE03772547FDAE00514980 /* MusicViewController.swift */; };
 		75D461862C3B4637648DA373 /* Pods_AppStoreJSONApis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B546D0D826BFF199883B4174 /* Pods_AppStoreJSONApis.framework */; };
 		C709D00B222758F000DB3582 /* TodayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709D00A222758F000DB3582 /* TodayController.swift */; };
 		C709D00E2227595F00DB3582 /* TodayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709D00D2227595F00DB3582 /* TodayCell.swift */; };
@@ -54,6 +57,9 @@
 
 /* Begin PBXFileReference section */
 		1B2FFBFD49E15C9AD196A147 /* Pods-AppStoreJSONApis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreJSONApis.release.xcconfig"; path = "Target Support Files/Pods-AppStoreJSONApis/Pods-AppStoreJSONApis.release.xcconfig"; sourceTree = "<group>"; };
+		3AFE036F2547FD4800514980 /* TrackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCell.swift; sourceTree = "<group>"; };
+		3AFE03732547FD7C00514980 /* FooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterCell.swift; sourceTree = "<group>"; };
+		3AFE03772547FDAE00514980 /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
 		3FCCD7F9DF482338C6CCCE59 /* Pods-AppStoreJSONApis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreJSONApis.debug.xcconfig"; path = "Target Support Files/Pods-AppStoreJSONApis/Pods-AppStoreJSONApis.debug.xcconfig"; sourceTree = "<group>"; };
 		B546D0D826BFF199883B4174 /* Pods_AppStoreJSONApis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStoreJSONApis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C709D00A222758F000DB3582 /* TodayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayController.swift; sourceTree = "<group>"; };
@@ -161,6 +167,23 @@
 			path = MainPage;
 			sourceTree = "<group>";
 		};
+		3AFE036E2547FD2E00514980 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				3AFE036F2547FD4800514980 /* TrackCell.swift */,
+				3AFE03732547FD7C00514980 /* FooterCell.swift */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
+		3AFE03762547FDA000514980 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				3AFE03772547FDAE00514980 /* MusicViewController.swift */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
 		C709D009222758E000DB3582 /* Today */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +244,7 @@
 		C74A89E5220E91BE00B61711 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3AFE03762547FDA000514980 /* Music */,
 				C7574FD82216035000B2487A /* Search */,
 				C7574FD32216028D00B2487A /* Apps */,
 				C709D009222758E000DB3582 /* Today */,
@@ -231,6 +255,7 @@
 		C7574F942210A32C00B2487A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3AFE036E2547FD2E00514980 /* Music */,
 				3AAABAE8253998770028E3C0 /* Search */,
 				C709D00C2227595100DB3582 /* Today */,
 				C7574FD9221603F100B2487A /* Apps */,
@@ -464,6 +489,8 @@
 				C7574FF4221792DD00B2487A /* AppGroup.swift in Sources */,
 				C7574FD52216029800B2487A /* AppsPageController.swift in Sources */,
 				C7574FF0221750E800B2487A /* AppsHeaderCell.swift in Sources */,
+				3AFE03702547FD4800514980 /* TrackCell.swift in Sources */,
+				3AFE03742547FD7C00514980 /* FooterCell.swift in Sources */,
 				C7574FA02212006400B2487A /* UIView+Layout.swift in Sources */,
 				C79E282922207B67009BFD83 /* ReviewRowCell.swift in Sources */,
 				C7ADA1AE222C434900639D96 /* TodayMultipleAppsController.swift in Sources */,
@@ -474,6 +501,7 @@
 				C7574FE222163A7900B2487A /* AppHorizontalCell.swift in Sources */,
 				C7530441221E343D00520E05 /* PreviewScreenshotsController.swift in Sources */,
 				C74A89E1220E47A600B61711 /* BaseTabBarController.swift in Sources */,
+				3AFE03782547FDAE00514980 /* MusicViewController.swift in Sources */,
 				C77BB74022292ECA0079384B /* TodayItem.swift in Sources */,
 				C7574FDB221603FE00B2487A /* AppsGroupCell.swift in Sources */,
 				C77BB738222860AE0079384B /* AppFullscreenDescriptionCell.swift in Sources */,
